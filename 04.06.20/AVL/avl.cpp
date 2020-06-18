@@ -29,14 +29,14 @@ struct tree
 };
 
 
-int height(tree* root) {
+int height(tree* root) {    //высота
 
 	return root ? root->height : 0;
 
 
 }
 
-void fixheight(tree* root)
+void correctHeight(tree* root)   
 {
 	int heightLeft = height(root->left);
 	int heightRight = height(root->right);
@@ -45,7 +45,7 @@ void fixheight(tree* root)
 }
 
 
-int diff(tree* root) {
+int diff(tree* root) { //разница высот
 
 	return height(root->right) - height(root->left);
 }
@@ -56,8 +56,8 @@ tree* Left(tree* root) //левый поворот
 	tree* tmp  = root->right;
 	root->right = tmp->left;
 	tmp->left = root;
-	fixheight(root);
-	fixheight(tmp);
+	correctHeight(root);
+	correctHeight(tmp);
 	return tmp;
 }
 
@@ -65,16 +65,16 @@ tree* Right(tree* root) {  //правый поворот
 	tree* tmp = root->left;
 	root->left = tmp->right;
 	tmp->right = root;
-	fixheight(root);
-	fixheight(tmp);
+	correctHeight(root);
+	correctHeight(tmp);
 	return tmp;
 }
 
 
 
-tree* balance(tree* root) 
+tree* balance(tree* root)  //балансировка 
 {
-	fixheight(root);
+	correctHeight(root);
 	int d = diff(root);
 
 	if (d == 2)
@@ -93,7 +93,7 @@ tree* balance(tree* root)
 }
 
 
-tree* del_min(tree* root) {
+tree* del_min(tree* root) { 
 	if (root->left == NULL)
 		return root->right;
 	root->left = del_min(root->left);
@@ -126,7 +126,7 @@ tree* search(tree* root, int value) {
 
 }
 
-tree* addTree(tree *root, int value) {
+tree* addTree(tree *root, int value) { //добавить
 
 	if (!root) return new tree(value);
 	
@@ -163,15 +163,15 @@ tree* del(tree* root, int value) {
 
 }
 
-void print_LRR(tree* root)
-{
-	if (root != NULL)
-	{
-		print_LRR(root->left);
-		cout << root->value << endl;
-		print_LRR(root->right);
-	}
-}
+// void print_LRR(tree* root)
+// {
+// 	if (root != NULL)
+// 	{
+// 		print_LRR(root->left);
+// 		cout << root->value << endl;
+// 		print_LRR(root->right);
+// 	}
+// }
 
 
 void Print(tree* root, int r = 0)
