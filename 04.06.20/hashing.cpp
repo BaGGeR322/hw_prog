@@ -203,7 +203,7 @@ int main() {
          cout << search(table, key) << endl;
          f >> key;
          count++;
-         cout << count;
+         
 
      }
      unsigned int end_time = clock();
